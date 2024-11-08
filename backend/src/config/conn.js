@@ -5,11 +5,11 @@ const conn = new Sequelize(
     {host: "localhost", dialect: "mysql"}
 )
 
-try{
-    await conn.authenticate()
-    console.log("Connection MYSQL")
-}catch(error){
-    console.error("error: ", error)
+try {
+    await conn.authenticate()  // Autentica a conexão
+    console.log("Connection to MySQL has been established successfully.")
+} catch (error) {
+    console.error("Unable to connect to the database:", error)
 }
 
 export default conn;

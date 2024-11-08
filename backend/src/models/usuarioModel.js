@@ -2,6 +2,11 @@ import { DataTypes } from 'sequelize';
 import conn from '../config/conn.js'
 
 const Usuario = conn.define('Usuario', {
+    usuarioId: {
+        type: DataTypes.UUID, 
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
     nome: {
         type: DataTypes.STRING,
         allowNull: false // Nome é obrigatório
@@ -13,11 +18,12 @@ const Usuario = conn.define('Usuario', {
     },
     senha: {
         type: DataTypes.STRING,
-        allowNull: false // Senha é obrigatória
+        allowNull: false
     },
     foto: {
         type: DataTypes.STRING,
-        allowNull: false // Foto é obrigatória
+        allowNull: false,
+        defaultValue: "placeholder.png"
     }
 });
 
