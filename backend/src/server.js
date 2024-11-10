@@ -3,7 +3,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import conn from './config/conn.js'
 
-import routes from './routes.js'
+import userRouter from './routes/userRouter.js'
 
 const PORT = "3333"
 
@@ -22,12 +22,7 @@ conn.sync().then(() => {
     console.error(error)
 })
 
-app.use("/", routes)
-
-
-app.use("/", (req, res) => {
-    res.status(200).json({message: "Server rodando"})
-})
+app.use("/u", userRouter)
 
 app.use("*", (req, res)=> {
     res.status(404).json({error: "Rota não encontrada"})

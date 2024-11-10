@@ -13,11 +13,11 @@ const Login = () => {
         <>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <label for="email">
+                <label htmlFor="email">
                     <input type="email" name="email" placeholder="Digite seu email"/>
                 </label>
-                <label for="senha">
-                    <input type="senha" name="senha" placeholder="Digite sua senha"/>
+                <label htmlFor="senha">
+                    <input type="password" name="senha" placeholder="Digite sua senha"/>
                 </label>
                 <input type="submit" value="aaa" />
             </form>

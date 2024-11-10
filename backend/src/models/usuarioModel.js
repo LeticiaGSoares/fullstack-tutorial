@@ -9,12 +9,12 @@ const Usuario = conn.define('Usuario', {
     },
     nome: {
         type: DataTypes.STRING,
-        allowNull: false // Nome é obrigatório
+        allowNull: false
     },
     email: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false // Email é obrigatório
+        allowNull: false
     },
     senha: {
         type: DataTypes.STRING,
