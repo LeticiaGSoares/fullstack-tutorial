@@ -1,7 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
-import cookie from 'cookie-parser';
 
 import Usuario from '../models/usuarioModel.js'
 
@@ -100,7 +99,6 @@ router.post('/login', async (req, res) => {
     }
 
     try { 
-
         const usuario = await Usuario.findOne({where : {email: email}})
         if (!usuario) {
             return res.status(401).json({ error: "Email não registrado" });
@@ -112,17 +110,17 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: "Senha incorreta" });
         }
 
-        const tokenUsuario = jwt.sign({email}, "senhaJwt", {expiresIn: '7d'})
+        const token = jwt.sign({email}, "senhaJwt", {expiresIn: '7d'})
         
         // O cookie HTTP-only não pode ser acessado por JavaScript, o que o protege de ataques XSS.
-        res.cookie('token', tokenUsuario, {
+        res.cookie('token', token, {
             httpOnly: true,    // Impede que o JavaScript do navegador acesse o cookie
             secure: true,      // Envia o cookie apenas em conexões HTTPS (ideal para produção)
             sameSite: 'Strict', // Protege contra CSRF ao restringir o envio do cookie a requisições do mesmo site
             maxAge: 30 * 24 * 60 * 60 * 1000 // Tempo de expiração do cookie (30 dias em milissegundos)
         });
 
-        res.json({tokenUsuario})
+        res.json({token})
 
     } catch (err) {
         console.error('Erro ao criar o usuário:', err);
